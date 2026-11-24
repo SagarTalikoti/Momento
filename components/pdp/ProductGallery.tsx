@@ -114,12 +114,22 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, title })
 
   return (
     <div className="flex flex-col gap-3.5">
-      {/* 1. Main Slider Image Container */}
+      {/* 1. Main Slider Image Container (Clickable to view full image) */}
       <div
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="group relative w-full aspect-[4/3] sm:aspect-square rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-br from-brand-50 to-brand-100 border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] select-none"
+        onClick={() => setIsLightboxOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsLightboxOpen(true);
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label="Click card to view full screen image"
+        className="group relative w-full aspect-[4/3] sm:aspect-square rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-br from-brand-50 to-brand-100 border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-500"
       >
         <Image
           src={activeImage}
@@ -127,8 +137,15 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, title })
           fill
           priority
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover transition-transform duration-500 ease-out"
+          className="object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
         />
+
+        {/* Click to expand hover indicator */}
+        <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/75 text-white text-[12.5px] font-bold backdrop-blur-md shadow-xl transform scale-95 group-hover:scale-100 transition-transform">
+            <Maximize2 className="w-4 h-4 text-brand-300" /> Click to view image
+          </span>
+        </div>
 
         {/* Top Badges */}
         <div className="absolute top-3.5 left-3.5 flex flex-col gap-1.5 z-10 pointer-events-none">
@@ -140,11 +157,14 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, title })
           </span>
         </div>
 
-        {/* Top Right Action Button: Actual Share (Wishlist removed per user request) */}
+        {/* Top Right Action Button: Actual Share */}
         <div className="absolute top-3.5 right-3.5 flex items-center gap-2 z-10">
           <button
             type="button"
-            onClick={handleShare}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleShare();
+            }}
             aria-label="Share this celebration package"
             className="w-10 h-10 rounded-full bg-white/95 hover:bg-white text-gray-800 hover:text-brand-600 shadow-md flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer"
             title="Share with friends & family"
@@ -220,17 +240,21 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, title })
           aria-modal="true"
         >
           {/* Top Bar with Counter and Close */}
-          <div className="absolute top-4 inset-x-4 flex items-center justify-between text-white z-20">
-            <span className="text-[14px] font-semibold tracking-wide bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
-              {selectedIdx + 1} of {galleryImages.length}
+          <div className="absolute top-4 inset-x-4 sm:inset-x-8 flex items-center justify-between text-white z-20">
+            <span className="text-[13px] sm:text-[14px] font-bold tracking-wide bg-black/60 px-4 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-lg">
+              {selectedIdx + 1} / {galleryImages.length} Photos
             </span>
             <button
               type="button"
-              onClick={() => setIsLightboxOpen(false)}
-              className="p-2 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors cursor-pointer"
-              title="Close viewer (Esc)"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsLightboxOpen(false);
+              }}
+              className="w-11 h-11 rounded-full bg-white/25 hover:bg-white text-white hover:text-black transition-all flex items-center justify-center cursor-pointer shadow-2xl hover:scale-105 active:scale-95 border border-white/20"
+              title="Close (Esc)"
+              aria-label="Close image"
             >
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6 stroke-[3]" />
             </button>
           </div>
 

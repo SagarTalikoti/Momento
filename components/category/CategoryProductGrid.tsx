@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Star, Plus, ShieldCheck, Sparkles, Filter, Search, X, SlidersHorizontal, ArrowUpDown, ChevronDown, Check } from "lucide-react";
+import { Star, Plus, ShieldCheck, Sparkles, Filter, Search, X, SlidersHorizontal, ArrowUpDown, ChevronDown, Check, Maximize2 } from "lucide-react";
 import { ProductDetail } from "@/lib/products";
 import { useApp } from "../context/AppContext";
 
@@ -28,7 +28,18 @@ export const CategoryProductGrid: React.FC<CategoryProductGridProps> = ({
   const [activeFilter, setActiveFilter] = useState<"all" | "budget" | "mid" | "premium" | "top">("all");
   const [sortBy, setSortBy] = useState<"featured" | "price-asc" | "price-desc" | "rating">("featured");
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [imageModalProduct, setImageModalProduct] = useState<{ title: string; image: string } | null>(null);
   const sortRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setImageModalProduct(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -285,6 +296,24 @@ export const CategoryProductGrid: React.FC<CategoryProductGridProps> = ({
                   )}
                 </div>
 
+                {/* View Image Button on Card */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setImageModalProduct({
+                      title: product.title,
+                      image: product.image,
+                    });
+                  }}
+                  title="View full image"
+                  aria-label={`View ${product.title} image`}
+                  className="absolute top-2 right-2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-black text-white shadow-md flex items-center justify-center opacity-90 sm:opacity-0 group-hover:opacity-100 transition-all hover:scale-110 z-10 cursor-pointer"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                </button>
+
                 {/* Quick Add Button */}
                 <button
                   type="button"
@@ -348,6 +377,49 @@ export const CategoryProductGrid: React.FC<CategoryProductGridProps> = ({
               </div>
             </Link>
           ))}
+        </div>
+      )}
+
+      {/* Full-Screen Image View Modal with Cross Close Symbol */}
+      {imageModalProduct && (
+        <div
+          onClick={() => setImageModalProduct(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 animate-in fade-in duration-200"
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Top Bar with Title and Close Cross */}
+          <div className="absolute top-4 inset-x-4 sm:inset-x-8 flex items-center justify-between text-white z-20">
+            <span className="text-[13px] sm:text-[14px] font-bold tracking-wide bg-black/60 px-4 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-lg truncate max-w-md">
+              {imageModalProduct.title}
+            </span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setImageModalProduct(null);
+              }}
+              className="w-11 h-11 rounded-full bg-white/25 hover:bg-white text-white hover:text-black transition-all flex items-center justify-center cursor-pointer shadow-2xl hover:scale-105 active:scale-95 border border-white/20"
+              title="Close image (Esc)"
+              aria-label="Close image view"
+            >
+              <X className="w-6 h-6 stroke-[3]" />
+            </button>
+          </div>
+
+          {/* Large Image */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-3xl max-h-[82vh] aspect-[4/3] sm:aspect-square rounded-2xl overflow-hidden shadow-2xl bg-black/40"
+          >
+            <Image
+              src={imageModalProduct.image}
+              alt={imageModalProduct.title}
+              fill
+              sizes="(max-width: 1024px) 100vw, 900px"
+              className="object-contain"
+            />
+          </div>
         </div>
       )}
     </div>

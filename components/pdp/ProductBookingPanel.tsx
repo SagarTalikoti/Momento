@@ -134,10 +134,10 @@ export const ProductBookingPanel: React.FC<ProductBookingPanelProps> = ({ produc
   const [isCustomTimeActive, setIsCustomTimeActive] = useState(false);
   const [customTime, setCustomTime] = useState("05:30 PM");
 
-  // Pincode state: only validated when user clicks "Check", default 591201 verified initially
-  const [pincode, setPincode] = useState("591201");
-  const [isChecked, setIsChecked] = useState(true);
-  const [isPinValid, setIsPinValid] = useState(true);
+  // Pincode state: default empty, only validated when user clicks "Check"
+  const [pincode, setPincode] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+  const [isPinValid, setIsPinValid] = useState(false);
 
   // Selected add-ons set
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
@@ -149,6 +149,12 @@ export const ProductBookingPanel: React.FC<ProductBookingPanelProps> = ({ produc
   };
 
   const handleCheckPincode = () => {
+    if (!pincode.trim()) {
+      setIsChecked(true);
+      setIsPinValid(false);
+      showToast("Please enter your 6-digit Indian PIN code.");
+      return;
+    }
     const res = validateIndianPincode(pincode);
     setIsChecked(true);
     setIsPinValid(res.isValid);
@@ -265,7 +271,8 @@ export const ProductBookingPanel: React.FC<ProductBookingPanelProps> = ({ produc
     const activeAddons = ADD_ONS.filter((addon) => isAddonSelected(addon));
     const addonNames = activeAddons.map((a) => `${a.name} (+₹${a.price})`).join(", ");
     const addonText = addonNames ? ` + Add-ons: [${addonNames}]` : "";
-    const msg = `Hi Momento Team! I am interested in booking *${product.title}* on *${displayDateLabel}* at *${displayTimeLabel}*${addonText}. Total Amount: ₹${finalPrice.toLocaleString("en-IN")}. PIN: ${pincode}. Please confirm booking!`;
+    const pinText = pincode ? ` PIN: ${pincode}.` : "";
+    const msg = `Hi Momento Team! I am interested in booking *${product.title}* on *${displayDateLabel}* at *${displayTimeLabel}*${addonText}. Total Amount: ₹${finalPrice.toLocaleString("en-IN")}.${pinText} Please confirm booking!`;
     const url = `https://wa.me/918151959023?text=${encodeURIComponent(msg)}`;
     window.open(url, "_blank");
   };
