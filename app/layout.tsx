@@ -61,6 +61,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload critical above-the-fold category images for instantaneous 0ms display */}
+        <link rel="preload" as="image" href="/images/categories/birthday-decor.webp" type="image/webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/categories/kids-birthday.webp" type="image/webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/categories/newborn-welcome.webp" type="image/webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/categories/baby-shower.webp" type="image/webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/categories/romantic.webp" type="image/webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/categories/wedding-decor.webp" type="image/webp" fetchPriority="high" />
+      </head>
       <body className="min-h-screen flex flex-col antialiased bg-white selection:bg-brand-500 selection:text-white">
         <a
           href="#main"
