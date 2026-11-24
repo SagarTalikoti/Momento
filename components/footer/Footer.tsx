@@ -8,10 +8,6 @@ import {
   ShieldCheck,
   MapPin,
   Clock,
-  Instagram,
-  Facebook,
-  Youtube,
-  Linkedin,
   Phone,
   Mail,
   Heart,
@@ -127,46 +123,6 @@ export const Footer: React.FC = () => {
                 <Mail className="w-4 h-4 text-brand-600 shrink-0" />
                 <span>care@momento.com</span>
               </div>
-            </div>
-
-            {/* Social Icons */}
-            <div className="flex items-center gap-2.5 pt-2">
-              <a
-                href="https://instagram.com/momento"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-9 h-9 rounded-full bg-gray-100 hover:bg-brand-50 hover:text-brand-600 text-gray-600 flex items-center justify-center transition-colors"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href="https://facebook.com/momento"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-gray-100 hover:bg-brand-50 hover:text-brand-600 text-gray-600 flex items-center justify-center transition-colors"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="https://youtube.com/momento"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="w-9 h-9 rounded-full bg-gray-100 hover:bg-brand-50 hover:text-brand-600 text-gray-600 flex items-center justify-center transition-colors"
-              >
-                <Youtube className="w-4 h-4" />
-              </a>
-              <a
-                href="https://linkedin.com/company/momento"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="w-9 h-9 rounded-full bg-gray-100 hover:bg-brand-50 hover:text-brand-600 text-gray-600 flex items-center justify-center transition-colors"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
             </div>
           </div>
 
