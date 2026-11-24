@@ -58,6 +58,8 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({
                   src={item.image}
                   alt={item.alt || item.title}
                   fill
+                  loading={idx < 6 ? "eager" : "lazy"}
+                  decoding="async"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />

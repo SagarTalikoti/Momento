@@ -269,7 +269,7 @@ export const CategoryProductGrid: React.FC<CategoryProductGridProps> = ({
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-5">
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((product, idx) => (
             <Link
               key={product.slug}
               href={`/decor/${product.slug}`}
@@ -283,6 +283,9 @@ export const CategoryProductGrid: React.FC<CategoryProductGridProps> = ({
                   src={product.image}
                   alt={product.alt || product.title}
                   fill
+                  loading={idx < 6 ? "eager" : "lazy"}
+                  priority={idx < 4}
+                  decoding="async"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 />

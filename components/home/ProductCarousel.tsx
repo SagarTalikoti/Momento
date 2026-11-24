@@ -107,7 +107,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
         tabIndex={0}
         role="region"
         aria-label={`${title} carousel`}
-        className="flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2 -mx-1 px-1 scroll-pl-1"
+        className="flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2 -mx-1 px-1 scroll-pl-1 overscroll-x-contain"
       >
         {cards.map((card, idx) => {
           const productHref = card.href?.startsWith("/decor/")
@@ -132,6 +132,9 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                     src={card.image}
                     alt={card.alt || card.title}
                     fill
+                    loading={idx < 4 ? "eager" : "lazy"}
+                    priority={idx < 2}
+                    decoding="async"
                     sizes="(max-width: 640px) 70vw, (max-width: 1024px) 33vw, 280px"
                     className="object-cover group-hover:scale-[1.05] transition-transform duration-500 ease-out"
                   />

@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 export const HeroBanner: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const animatedRef = useRef<HTMLDivElement>(null);
 
-  // Subtle GPU-accelerated scroll-linked gentle zoom (scale 1.0 to 1.035)
+  // Pure GPU-accelerated scroll-linked gentle zoom (zero React re-renders for buttery 120fps)
   useEffect(() => {
     let animationFrameId: number;
 
     const handleScroll = () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !animatedRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
@@ -22,7 +22,9 @@ export const HeroBanner: React.FC = () => {
         const totalTravel = windowHeight + rect.height;
         const currentProgress = (windowHeight - rect.top) / totalTravel;
         const clamped = Math.max(0, Math.min(1, currentProgress));
-        setScrollProgress(clamped);
+        const scale = 1.0 + clamped * 0.035;
+        const translateY = (clamped - 0.5) * 6;
+        animatedRef.current.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`;
       }
     };
 
@@ -40,10 +42,6 @@ export const HeroBanner: React.FC = () => {
     };
   }, []);
 
-  // Compute scale strictly between 1.0 and 1.035 with subtle 4px parallax
-  const scale = 1.0 + scrollProgress * 0.035;
-  const translateY = (scrollProgress - 0.5) * 6;
-
   return (
     <div
       ref={containerRef}
@@ -51,10 +49,10 @@ export const HeroBanner: React.FC = () => {
     >
       {/* Scroll-Linked Animated Wrapper */}
       <div
+        ref={animatedRef}
         style={{
-          transform: `translate3d(0, ${translateY}px, 0) scale(${scale})`,
+          transform: "translate3d(0, 0px, 0) scale(1)",
           willChange: "transform",
-          transition: "transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
         }}
         className="relative w-full overflow-hidden"
       >

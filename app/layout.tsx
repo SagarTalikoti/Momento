@@ -9,6 +9,7 @@ import { ProductQuickViewModal } from "@/components/modals/ProductQuickViewModal
 import { MobileDrawer } from "@/components/header/MobileDrawer";
 import { MobileBottomBar } from "@/components/mobile/MobileBottomBar";
 import { Toast } from "@/components/common/Toast";
+import { SpeedOptimizer } from "@/components/common/SpeedOptimizer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://momento.com"),
@@ -98,6 +99,7 @@ export default function RootLayout({
           {/* Mobile Navigation & Floating Actions */}
           <MobileBottomBar />
           <Toast />
+          <SpeedOptimizer />
         </AppProvider>
       </body>
     </html>
