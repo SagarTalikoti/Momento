@@ -1,0 +1,96 @@
+@import "../styles/original.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/plus-jakarta-sans-e629b5bc06499d58.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600 900;
+  font-display: swap;
+  src: url('/fonts/nunito-d8cb5ab3660140cd.woff2') format('woff2');
+}
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  --brand-50: #fbf5fc;
+  --brand-100: #f6ecf9;
+  --brand-200: #edd9f4;
+  --brand-300: #dfb9ec;
+  --brand-400: #cb8ee0;
+  --brand-500: #8E2C8F;
+  --brand-600: #7c2d8c;
+  --brand-700: #661e73;
+  --brand-800: #541c5c;
+  --brand-900: #42144a;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: clip;
+}
+
+body {
+  color: #111827;
+  background-color: #ffffff;
+  overflow-x: clip;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Custom scrollbar hiding utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Momento Brand Logo overrides */
+.Header-module__5oas6a__brand {
+  display: flex !important;
+  align-items: center !important;
+}
+.Header-module__5oas6a__brand > a {
+  width: auto !important;
+  max-width: 280px !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.Header-module__5oas6a__brand img {
+  width: auto !important;
+  max-width: 190px !important;
+  height: 50px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+@media (min-width: 640px) {
+  .Header-module__5oas6a__brand img {
+    max-width: 230px !important;
+    height: 60px !important;
+  }
+}
+@media (min-width: 1024px) {
+  .Header-module__5oas6a__brand img {
+    max-width: 270px !important;
+    height: 70px !important;
+  }
+}
+

@@ -1,0 +1,152 @@
+{
+  "topMetroCities": [
+    {
+      "name": "Delhi NCR",
+      "icon": "\ud83c\udfdb\ufe0f",
+      "popular": true
+    },
+    {
+      "name": "Mumbai",
+      "icon": "\ud83c\udf0a",
+      "popular": true
+    },
+    {
+      "name": "Bangalore",
+      "icon": "\ud83d\udcbb",
+      "popular": true
+    },
+    {
+      "name": "Hyderabad",
+      "icon": "\ud83c\udff0",
+      "popular": true
+    },
+    {
+      "name": "Kolkata",
+      "icon": "\ud83c\udf09",
+      "popular": true
+    },
+    {
+      "name": "Pune",
+      "icon": "\ud83c\udf93",
+      "popular": true
+    },
+    {
+      "name": "Chennai",
+      "icon": "\ud83c\udfd6\ufe0f",
+      "popular": true
+    },
+    {
+      "name": "Ahmedabad",
+      "icon": "\ud83e\ude81",
+      "popular": true
+    },
+    {
+      "name": "Jaipur",
+      "icon": "\ud83d\udc51",
+      "popular": true
+    },
+    {
+      "name": "Lucknow",
+      "icon": "\ud83d\udd4c",
+      "popular": true
+    },
+    {
+      "name": "Chandigarh",
+      "icon": "\ud83c\udf39",
+      "popular": true
+    },
+    {
+      "name": "Indore",
+      "icon": "\ud83c\udf72",
+      "popular": true
+    }
+  ],
+  "regions": [
+    {
+      "region": "Delhi NCR",
+      "cities": [
+        "Delhi",
+        "Gurgaon",
+        "Noida",
+        "Ghaziabad",
+        "Faridabad"
+      ]
+    },
+    {
+      "region": "Punjab & North",
+      "cities": [
+        "Chandigarh",
+        "Amritsar",
+        "Jalandhar",
+        "Ludhiana",
+        "Panipat",
+        "Sonipat",
+        "Jammu",
+        "Dehradun",
+        "Meerut"
+      ]
+    },
+    {
+      "region": "UP & Central",
+      "cities": [
+        "Lucknow",
+        "Kanpur",
+        "Varanasi",
+        "Prayagraj",
+        "Gorakhpur",
+        "Agra",
+        "Bhopal",
+        "Indore",
+        "Gwalior",
+        "Jabalpur",
+        "Raipur"
+      ]
+    },
+    {
+      "region": "West India",
+      "cities": [
+        "Mumbai",
+        "Navi Mumbai",
+        "Thane",
+        "Pune",
+        "Nashik",
+        "Nagpur",
+        "Aurangabad",
+        "Lonavala",
+        "Ahmedabad",
+        "Surat",
+        "Vadodara",
+        "Rajkot",
+        "Gandhinagar",
+        "Jaipur",
+        "Jodhpur",
+        "Udaipur",
+        "Kota"
+      ]
+    },
+    {
+      "region": "South India",
+      "cities": [
+        "Bangalore",
+        "Hyderabad",
+        "Secunderabad",
+        "Chennai",
+        "Coimbatore",
+        "Visakhapatnam"
+      ]
+    },
+    {
+      "region": "East India",
+      "cities": [
+        "Kolkata",
+        "Howrah",
+        "Siliguri",
+        "Patna",
+        "Ranchi",
+        "Jamshedpur",
+        "Bhubaneswar",
+        "Guwahati"
+      ]
+    }
+  ]
+}
